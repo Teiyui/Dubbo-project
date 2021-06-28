@@ -15,8 +15,14 @@
     <dubbo:protocol name="dubbo" port="20890"></dubbo:protocol>
 
     <!-- 4. 暴露服务 ref：指向服务接口的真正实现类-->
-    <dubbo:service interface="com.zyw.service.UserService" ref="userServiceImpl"></dubbo:service>
+    <!-- 老版本服务-->
+    <dubbo:service interface="com.zyw.service.UserService" ref="userServiceImpl" version="1.0.0"></dubbo:service>
+    <!-- 新版本服务-->
+    <dubbo:service interface="com.zyw.service.UserService" ref="userServiceImplMultiVersion" version="1.0.1"></dubbo:service>
 
     <!-- 服务的真正实现-->
+    <!-- 老版本：1.0.0-->
     <bean id="userServiceImpl" class="com.zyw.service.impl.UserServiceImpl"></bean>
+    <!-- 新版本：1.0.1-->
+    <bean id="userServiceImplMultiVersion" class="com.zyw.service.impl.UserServiceImplMultiVersion"></bean>
 </beans>
