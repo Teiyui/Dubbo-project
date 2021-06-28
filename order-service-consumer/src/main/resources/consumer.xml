@@ -15,6 +15,16 @@
     <dubbo:registry protocol="zookeeper" address="127.0.0.1:2181"></dubbo:registry>
 
     <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
-    <dubbo:reference id="userService" interface="com.zyw.service.UserService"></dubbo:reference>
+    <!-- timeout="0" 超时默认是1000ms -->
+    <!-- retries="" 重试次数，不包含第一次调用 -->
+    <dubbo:reference id="userService" interface="com.zyw.service.UserService" timeout="1000" retries="3">
+        <dubbo:method name="getUserAddressList" timeout="1000"></dubbo:method>
+    </dubbo:reference>
+
+    <!-- 配置当前消费者的统一规则，所有的服务都不检查 -->
+    <dubbo:consumer check="false"></dubbo:consumer>
+
+    <!-- 配置当前注册中心的统一规则，注册订阅失败不检查 -->
+    <dubbo:registry check="false"></dubbo:registry>
 
 </beans>
